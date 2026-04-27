@@ -6,8 +6,35 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-
+from scrapy.exceptions import DropItem
 
 class ChocolatescraperPipeline:
     def process_item(self, item, spider):
         return item
+
+class PriceToUSDPipeline:
+    gbpToUsdRate = 1.25  
+
+    def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        if adapter.get('price'):
+            floatPrice = float(adapter['price'])
+            adapter['price'] = floatPrice * self.gbpToUsdRate
+            return item
+        
+        else: 
+            raise DropItem(f"Missing price in {item}")
+        
+class DuplicatePipe:
+    def __init__(self):
+        self.names_seen = set()
+
+    def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+
+        if adapter['name'] in self.names_seen:
+            raise DropItem(f"Duplicate item found: {item}")
+        else:
+            self.names_seen.add(adapter['name'])
+            return item 
