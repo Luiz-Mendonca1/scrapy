@@ -10,25 +10,37 @@ Este repositório contém meus estudos, experimentos e projetos práticos focado
 **/02course-walisson-silva**: Contém os códigos desenvolvidos a partir da playlist
 [Web Scraping com Python](https://www.youtube.com/watch?v=42sTntMEn6o&list=PLg3ZPsW_sghSkRacynznQeEs-vminyTQk) do canal Walisson Silva.
 
-## Como executar os projetos
+## Guia de Inicialização Rápida
 
-Crie e ative um ambiente virtual:
+**Configurar o Ambiente Virtual**
 
+O uso de um ambiente virtual é obrigatório para garantir a integridade das dependências:
 ```
+# Criar o ambiente
 python -m venv venv
-# No Windows:
+
+# Ativar (Windows)
 .\venv\Scripts\activate
-# No Linux/Mac:
+
+# Ativar (Linux/Mac)
 source venv/bin/activate
 ```
 
-Instale as dependências:
+**Instalar Dependências**
+Instale todos os pacotes necessários de uma vez:
 ```
-pip install scrapy
+pip install scrapy selenium requests beautifulsoup4 pandas webdriver-manager
 ```
 
-Navegue até a pasta da spider desejada e execute:
+**Execução**
+Para projetos baseados em Scrapy:
 
 ```
+cd 01course-scrapeops
 scrapy crawl nome_da_spider
+```
+
+Para scripts de Automação/Selenium:
+```
+python 02course-walisson-silva/nome_do_arquivo
 ```
